@@ -25,8 +25,20 @@ course_schedule('comp', '352', 'aaae', 'wed', '1315', '1415').
 course_schedule('comp', '333', 'cc', 'tue', '1315', '1545').
 course_schedule('comp', '333', 'cc', 'thu', '1315', '1545').
 
-team(X), member(S, X),
-findall(S, takes_course(S, _, _, _), LL),
-length(LL, NN),
-write(S), write(' has only taken '), write(NN),
-write(' courses and tutorials in summer 2020.'), nl, fail.
+
+%member(X, [X | _]) :- !.
+%member(X, [_ | T]) :- member(X, T).
+
+/* Question 3 */
+get_sections(CNAME, CNUM, L) :- findall(L, course_schedule(CNAME, CNUM, L, _, _, _), L).
+all_sections(CNAME, CNUM, L) :- get_sections(CNAME, CNUM, T), list_to_set(T, L).
+
+has_taken(S, [CNAM|[CNUM|[SEC|[]]]]) :- takes_course(S, CNAM, CNUM, SEC).
+
+has_taken2(S, [CNAM|[CNUM|[]]]) :- takes_course(S, CNAM, CNUM, _).
+
+get_courses(S, L):- findall(T, takes_course(S, T, _, _), L).
+all_subjects(S, L) :- get_courses(S, T), list_to_set(T, L).
+
+course_to_list(CNAME, CNUM, CSEC, L) :- L = [CNAME, CNUM, CSEC].
+all_courses(S, L) :- findall(T, takes_course(S, T, _, _), L).
