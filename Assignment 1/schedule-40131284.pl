@@ -42,3 +42,14 @@ all_subjects(S, L) :- get_courses(S, T), list_to_set(T, L).
 
 course_to_list(CNAME, CNUM, CSEC, L) :- L = [CNAME, CNUM, CSEC].
 all_courses(S, L) :- findall(T, takes_course(S, T, _, _), L).
+
+/* Question 4 */
+/* This is the query for Question 4 
+
+team(X), member(S, X),
+findall(S,(takes_course(S, _, _,aa)),LL),
+length(LL, NN),
+write(S), write(' has only taken '), write(NN),
+write(' courses and tutorials in summer 2020.'), nl, fail.
+
+*/
