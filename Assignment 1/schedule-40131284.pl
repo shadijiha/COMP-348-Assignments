@@ -101,6 +101,7 @@ lucas_sequence(N, [H|T]) :- 	% This functions produces a lucas sequence inside a
     N1 is N - 1,
     lucas_sequence(N1, T).
 
-lucas_sequence_to_list(In, Out) :-	% This functions produces a lucas sequence inside a list in correct order
+lucas_sequence_to_list(In, Out) :-    % This functions produces a lucas sequence inside a list in correct order
     lucas_sequence(In, Out1),
-    reverse_list(Out1, Out).
+    reverse_list(Out1, [H|Out]).
+
